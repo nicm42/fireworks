@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%;width:100%;margin:0">
+<head>
+</head>
+<body style="background-color:black;height:100%;width:100%;margin:0;overflow:hidden;">
+	<canvas id="canvas"></canvas>
+
+	<script type="text/javascript">
+		var canvas = document.querySelector('#canvas');
+		var ctx = canvas.getContext("2d");
+		ctx.canvas.width = window.innerWidth;
+		ctx.canvas.height = window.innerHeight;
+
+		var particles = [];
+		var startTime = new Date().getTime();
+		var startX = random(10, canvas.width-10);
+		var startY = random(10, canvas.height-10);
+		var colour = '#'+Math.random().toString(16).substr(2,6);
+		var time = random(500,1500);
+		var alpha = 1;
+		draw();
+
+		function draw(){	
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			var p = {x: startX, y:startY, xVel:random(-5,5), yVel:random(-5,5)}
+			particles.push(p);
+			for(var i=0; i<particles.length; i++){
+				p = particles[i];
+				ctx.fillStyle = colour;
+				ctx.globalAlpha = alpha;
+				ctx.fillRect(p.x, p.y, 5, 5);
+				p.x+=p.xVel;
+				p.y+=p.yVel;
+			}
+			if(new Date().getTime() - startTime < time){
+				if(new Date().getTime() - startTime < time + 100){
+					alpha-=0.01;
+				}
+				window.requestAnimationFrame(draw);	
+			}else{
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+			}
+		}
+
+		function random(min, max) {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+	</script>
+</body>
+</html>
