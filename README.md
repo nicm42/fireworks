@@ -1,2 +1,2 @@
 # Fireworks
-Royal Institution Christmas Lectues 2019 inspired fireworks
+Royal Institution Christmas Lectures 2019 inspired fireworks
